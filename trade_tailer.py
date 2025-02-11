@@ -177,7 +177,7 @@ def process_trades(json_file_path, client, sleep_duration=60, too_long_ago_minut
 
 
 def run_trade_tailer():
-    json_file_path = '/home/meir/polymarket_copy_trader/tail_trades.json'
+    json_file_path = 'tail_trades.json'
     client = n.create_clob_client('0x40C3aB7B90438ebD80bf313F4B0d9C31410Df4E9')
     # Run the process_trades function continuously in a loop
     while True:
@@ -187,7 +187,7 @@ def run_trade_tailer():
 if __name__ == "__main__":
 
     # Replace with the path to your JSON file
-    json_file_path = '/home/meir/polymarket_copy_trader/tail_trades.json'
+    json_file_path = 'tail_trades.json'
     
     client = n.create_clob_client('0x40C3aB7B90438ebD80bf313F4B0d9C31410Df4E9')
     # Run the process_trades function continuously in a loop
