@@ -12,7 +12,6 @@ certifi==2024.12.14
 charset-normalizer==3.4.1
 ckzg==2.0.1
 cytoolz==0.12.3
-eip712-structs==1.1.0
 eth-account
 eth-hash==0.3.3
 eth-keyfile==0.8.1
