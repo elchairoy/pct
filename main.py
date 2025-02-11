@@ -6,7 +6,6 @@ You can also run every bot separately for easier testing and logic visualization
 
 import multiprocessing
 import trade_tailer as trader
-import risk_manager
 import trade_monitor
 from nice_funcs import extract_wallet_ids
 import os
@@ -23,15 +22,11 @@ def run_trade_monitor():
 def run_trader():
     trader.run_trade_tailer()
 
-def run_risk_manager():
-    risk_manager.run_risk_manager(user_address)
-
 if __name__ == "__main__":
     # Create separate processes for each function
     processes = [
         multiprocessing.Process(target=run_trade_monitor),
         multiprocessing.Process(target=run_trader)
-        #multiprocessing.Process(target=run_risk_manager)
     ]
 
     # Start each process
