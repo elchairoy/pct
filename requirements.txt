@@ -8,7 +8,7 @@ bitarray==2.9.2
 certifi==2024.7.4
 charset-normalizer==3.3.2
 ckzg==1.0.2
-eth-account==0.13.0
+eth-account==0.11.2
 eth-hash==0.7.0
 eth-keyfile==0.8.1
 eth-keys==0.5.1
@@ -31,7 +31,7 @@ parsimonious==0.10.0
 pluggy==1.5.0
 poly_eip712_structs==0.0.1
 protobuf==5.27.3
-py_clob_client==0.17.5
+py_clob_client==0.16.0
 py_order_utils==0.3.2
 pycryptodome==3.20.0
 pydantic==2.8.2
