@@ -117,7 +117,7 @@ tzdata==2024.1
 urllib3==2.2.2
 wasmtime==24.0.0
 wcwidth==0.2.13
-web3==6.20.2
+web3
 websockets==12.0
 widgetsnbextension==4.0.13
 yarl==1.9.4
