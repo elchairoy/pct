@@ -47,7 +47,7 @@ py_order_utils==0.3.2
 pycryptodome==3.21.0
 pydantic==2.10.4
 pydantic_core==2.27.2
-pysha3==1.0.2
+safe-pysha3
 pytest==8.3.4
 python-dateutil==2.9.0.post0
 python-dotenv==1.0.1
