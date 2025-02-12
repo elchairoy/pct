@@ -17,7 +17,7 @@ from proxy_wallets import proxy_wallets
 
 proxy_wallets = proxy_wallets
 
-def monitor_wallet(user_address, json_file_path, client)
+def monitor_wallet(user_address, json_file_path, client):
     print(f"Monitoring trades for wallet: {user_address}")
 
     # I think we want to check the positions, sleep, then check the trades.     
