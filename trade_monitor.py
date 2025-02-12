@@ -46,7 +46,7 @@ def monitor_wallet(user_address, json_file_path, client):
             current_trade = current_trades[0]  # Assume the most recent trade is the first item
             
             # Check if the most recent trade has changed
-            if current_trade != last_trade:
+            if current_trade['transactionHash'] != last_trade['transactionHash']:
                 print('----------------------BEGIN MONITORED TRADE------------------------------------------')
                 print(f"New trade detected for wallet {user_address}:")
                 n.get_recent_trade_stats(current_trade)
