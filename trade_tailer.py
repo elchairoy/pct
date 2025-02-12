@@ -24,8 +24,8 @@ import math
 
 # Function to execute trade using create_order
 def create_order(client, price, size, side, asset):
-    if size * price < 1:
-        size = math.ceil(1 / price)
+    if size * price < 2:
+        size = math.ceil(2 / price)
     order_args = OrderArgs(
         price=price,
         # make 1 for now
@@ -72,13 +72,13 @@ def process_trades(json_file_path, client, sleep_duration=60, too_long_ago_minut
         # if not trade.get('bot_executed', False):  # Default to True if key is missing
 
             my_balance = n.get_wallet_balance('0x40C3aB7B90438ebD80bf313F4B0d9C31410Df4E9')
-            price = trade['price'] + 0.01
+            price = trade['price']
             print(f"Market Title: {trade['title']}")
             print(f"current market price is {price}")
             # price = trade['price']
             size = trade['size']
             if size * price > 100:
-                size = size / 1000
+                size = min(size / 300, 5)
             else:
                 trade['bot_executed'] = True
                 with open(json_file_path, 'w') as file:
@@ -123,10 +123,10 @@ def process_trades(json_file_path, client, sleep_duration=60, too_long_ago_minut
                             if active_positions.loc[active_positions['conditionId'] == conditionId, 'asset'].values[0] != asset:
                                 # sell the opposite position
                                 print('Opposite position found, selling...')
-                                create_order(client, 1 - price, size, 'SELL', active_positions.loc[active_positions['conditionId'] == conditionId, 'asset'].values[0])
+                                create_order(client, 1 - price -0.01, size, 'SELL', active_positions.loc[active_positions['conditionId'] == conditionId, 'asset'].values[0])
                         else:
                             print('Active position less then 5$, creating trade...')
-                            create_order(client, price, size, side, asset)
+                            create_order(client, price+0.01, size, side, asset)
                             # Update the trade status to prevent re-execution
                         trade['bot_executed'] = True
                         # Save the immediate update back to JSON file
@@ -135,7 +135,7 @@ def process_trades(json_file_path, client, sleep_duration=60, too_long_ago_minut
 
                 else:
                     print('No active position, creating trade...')
-                    create_order(client, price, size, side, asset)
+                    create_order(client, price + 0.01, size, side, asset)
                     trade['bot_executed'] = True
 
                     # Save the immediate update back to JSON file
