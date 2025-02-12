@@ -122,14 +122,16 @@ def process_trades(json_file_path, client, sleep_duration=60, too_long_ago_minut
                         if active_positions['conditionId'].eq(conditionId).any():
                             if active_positions.loc[active_positions['conditionId'] == conditionId, 'asset'].values[0] != asset:
                                 # sell the opposite position
+                                print('Opposite position found, selling...')
                                 create_order(client, 1 - price, size, 'SELL', active_positions.loc[active_positions['conditionId'] == conditionId, 'asset'].values[0])
                         else:
+                            print('Active position less then 5$, creating trade...')
                             create_order(client, price, size, side, asset)
                             # Update the trade status to prevent re-execution
-                            trade['bot_executed'] = True
-                            # Save the immediate update back to JSON file
-                            with open(json_file_path, 'w') as file:
-                                json.dump(trades, file, indent=4)
+                        trade['bot_executed'] = True
+                        # Save the immediate update back to JSON file
+                        with open(json_file_path, 'w') as file:
+                            json.dump(trades, file, indent=4)
 
                 else:
                     print('No active position, creating trade...')
