@@ -13,7 +13,7 @@ import time
 import nice_funcs as n
 from threading import Thread
 from proxy_wallets import proxy_wallets
-
+import trade_tailer
 
 proxy_wallets = proxy_wallets
 
