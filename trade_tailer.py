@@ -173,7 +173,6 @@ def process_trades(json_file_path, client, sleep_duration=60, too_long_ago_minut
 
     print("All trades scanned, and updated or passed. Sleeping for 30 seconds.")
     print('----------------------------------------------------------------------')
-    time.sleep(30)  # Pause before the next iteration
 
 
 def run_trade_tailer():
