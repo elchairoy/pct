@@ -120,10 +120,15 @@ def process_trades(json_file_path, client, sleep_duration=60, too_long_ago_minut
                         conditionId = trade['conditionId']
                         asset = trade['asset']
                         if active_positions['conditionId'].eq(conditionId).any():
-                            if active_positions.loc[active_positions['conditionId'] == conditionId, 'asset'].values[0] != asset:
+                            opposite_position = active_positions.loc[active_positions['conditionId'] == conditionId, 'asset'].values[0]
+                            if opposite_position != asset:
+                                opposite_position_size = active_positions.loc[active_positions['conditionId'] == conditionId, 'size'].values[0]
                                 # sell the opposite position
                                 print('Opposite position found, selling...')
-                                create_order(client, 1 - price -0.01, size, 'SELL', active_positions.loc[active_positions['conditionId'] == conditionId, 'asset'].values[0])
+                                create_order(client, 1 - price, opposite_position_size, 'SELL', opposite_position)
+                                # buy the new position
+                                print('Creating trade...')
+                                create_order(client, price, size - opposite_position_size, side, asset)
                         else:
                             print('Active position less then 5$, creating trade...')
                             create_order(client, price+0.01, size, side, asset)
