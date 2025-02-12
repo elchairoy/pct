@@ -12,19 +12,5 @@ import os
 
 user_address = '0x3E9aaA70CCA15Af564993bD8e89086F712619385'
 
-def run_trade_monitor():
-    trade_monitor.main()
-
-def run_trader():
-    trader.run_trade_tailer()
-
 if __name__ == "__main__":
-    # Create separate processes for each function
-    processes = [
-        multiprocessing.Process(target=run_trade_monitor),
-        multiprocessing.Process(target=run_trader)
-    ]
-
-    # Start each process
-    for process in processes:
-        process.start()
+    trade_monitor.main()
