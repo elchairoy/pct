@@ -65,16 +65,21 @@ def monitor_wallet(user_address):
         else:
             print(f"No new trades found for wallet {user_address} or unexpected data format.")
 
+        trade_tailer.process_trades(json_file_path, client)
+
 def main():
     # # List of wallet addresses
     # proxy_wallets = proxy_wallets
     
     # Create and start a thread for each wallet address
+    json_file_path = 'tail_trades.json'
+    client = n.create_clob_client('0x40C3aB7B90438ebD80bf313F4B0d9C31410Df4E9')
+
     threads = []
     for wallet_info in proxy_wallets:
         print(f"Starting thread for wallet: {wallet_info['name']}")
         wallet = wallet_info['proxyWallet']
-        thread = Thread(target=monitor_wallet, args=(wallet,))
+        thread = Thread(target=monitor_wallet, args=(wallet, json_file_path, client))
         thread.start()
         threads.append(thread)
     
@@ -84,3 +89,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
