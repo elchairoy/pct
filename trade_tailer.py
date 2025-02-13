@@ -24,8 +24,8 @@ import math
 
 # Function to execute trade using create_order
 def create_order(client, price, size, side, asset):
-    if size * price < 2:
-        size = math.ceil(2 / price)
+    if size * price < 1:
+        size = math.ceil(1 / price)
     order_args = OrderArgs(
         price=price,
         # make 1 for now
