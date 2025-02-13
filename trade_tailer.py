@@ -107,7 +107,7 @@ def process_trades(json_file_path, client, sleep_duration=60, too_long_ago_minut
                 # Check if active_positions DataFrame is not empty and has the 'asset' column
                 elif not active_positions.empty and 'asset' in active_positions.columns:
                     # Check if the asset is already in active positions and the value is grater than 5$
-                    if active_positions['asset'].eq(trade['asset']).any()
+                    if active_positions['asset'].eq(trade['asset']).any():
                         if active_positions.loc[active_positions['asset'] == trade['asset'], 'initialValue'].values[0] > 5:
                             print('Already in position, skipping trade')
                         else:
