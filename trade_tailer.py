@@ -123,15 +123,16 @@ def process_trades(json_file_path, client, sleep_duration=60, too_long_ago_minut
                             opposite_position = active_positions.loc[active_positions['conditionId'] == conditionId, 'asset'].values[0]
                             if opposite_position != asset:
                                 opposite_position_size = active_positions.loc[active_positions['conditionId'] == conditionId, 'size'].values[0]
+                                opposite_position_size = float("{:.2f}".format(opposite_position_size))
                                 # sell the opposite position
                                 print('Opposite position found, selling...')
-                                create_order(client, 1 - price, opposite_position_size, 'SELL', opposite_position)
+                                create_order(client, 1 - price -0.02, opposite_position_size, 'SELL', opposite_position)
                                 # buy the new position
                                 print('Creating trade...')
-                                create_order(client, price, size - opposite_position_size, side, asset)
+                                create_order(client, price + 0.02, size - opposite_position_size, side, asset)
                         else:
                             print('Active position less then 5$, creating trade...')
-                            create_order(client, price+0.01, size, side, asset)
+                            create_order(client, price+0.02, size, side, asset)
                             # Update the trade status to prevent re-execution
                         trade['bot_executed'] = True
                         # Save the immediate update back to JSON file
@@ -140,7 +141,7 @@ def process_trades(json_file_path, client, sleep_duration=60, too_long_ago_minut
 
                 else:
                     print('No active position, creating trade...')
-                    create_order(client, price + 0.01, size, side, asset)
+                    create_order(client, price + 0.02, size, side, asset)
                     trade['bot_executed'] = True
 
                     # Save the immediate update back to JSON file
